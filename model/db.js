@@ -1,3 +1,4 @@
+// existe mas de una clase cuando se encuentra entre llaves {}
 import pkg from 'pg'
 const {Pool} = pkg;
 import { Sequelize } from 'sequelize';
@@ -9,7 +10,7 @@ async function getConnection() {
         host: db.host,
         database: db.database,
         password: db.password,
-        port: db.port,
+        port: db.port,  
     });
     await client.connect();
     return client;
@@ -18,7 +19,14 @@ async function getConnection() {
 const sequelizeClient = new Sequelize(db.database, db.user, db.password,{
     host: db.host,
     dialect: 'postgres',
+    dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false
+        }
+      }
 });
+
 
 sequelizeClient.authenticate()
     .then(() => {
