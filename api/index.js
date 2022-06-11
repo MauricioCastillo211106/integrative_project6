@@ -7,7 +7,7 @@ const app = express();
 
 //ROUTERS
  app.use('/api/user', user);
-//  app.use(cors({origin: true, credential: true}));
+
 
 //Servidor activo
 app.listen( api.port ,() => {
