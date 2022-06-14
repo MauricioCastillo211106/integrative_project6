@@ -8,7 +8,7 @@ const User = getData.sequelizeClient.define('cat_users',{
     password: Sequelize.STRING,
     phone_number: Sequelize.STRING,
 },{
-    
+    timestamps: false 
 })
 
 export const getUser = User;
