@@ -1,11 +1,20 @@
-export const api = {
-    port: process.env.API_PORT || 3000,
-};
+import path from 'path';
+import dotenv from 'dotenv';
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const data = dotenv.config({
+    path: path.resolve(__dirname, `../environments/.env.${process.env.NODE_ENV}`)
+})
+
 export const db = {
-    user: "ccdzuifnzwrrcj",
-    host: "ec2-52-72-99-110.compute-1.amazonaws.com",
-    database: "daieh26r7540di",
-    password: "c2b0f2e807479f63516c3b7122f538a1533c189670e36b9ffde69340a01f90e7",
-    port: "5432",
-    dialect: "postgres"
+    user: data.parsed.USER,
+    host: data.parsed.HOST,
+    database: data.parsed.DATABASE,
+    password: data.parsed.PASSWORD,
+};
+
+export const api = {
+    port: data.parsed.PORT,
 };

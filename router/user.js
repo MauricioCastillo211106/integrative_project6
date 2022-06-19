@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { success } from './response.js';
-import { getData } from '../model/db.js'
-import { getUser } from "../model/User.js";
+import { getData } from '../models/db.js'
+import { getUser } from "../models/User.js";
 
 
 
