@@ -14,24 +14,10 @@ const User = getData.sequelizeClient.define('cat_users', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: {
-            arg: true,
-            msg: 'This username is already taken.'
-        },
-    },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    phone_number: DataTypes.STRING,
-
 
 }, {
     tableName: 'cat_users',

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { success } from './response.js';
 import { getData } from '../models/db.js'
-import { getUser } from "../models/User.js";
+import { getSon } from "../models/Son.js";
 
 
 
@@ -10,9 +10,9 @@ import { getUser } from "../models/User.js";
 const router = Router();
 
 
-const user = getUser.build({ attributes: ['id', 'username',  'password'] });
-console.log(user instanceof getUser); // true
-console.log(user.name);
+const son = getSon.build({ attributes: ['id', 'name', 'fatherSurname', 'motherSurname', 'age', 'id_father'] });
+console.log(son instanceof getSon); // true
+console.log(son.name);
 
 
 router.get('/success', function (req, res) {
@@ -22,7 +22,7 @@ router.get('/success', function (req, res) {
 
 
 router.get('/list', async function (req, res) {
-    getUser.findAll({ attributes: ['username', 'password'] })
+    getUser.findAll({ attributes: ['name', 'fatherSurname', 'motherSurname', 'age', 'id_father'] })
         .then(users => {
             res.send(users)
         })
@@ -32,7 +32,7 @@ router.get('/list', async function (req, res) {
 })
 
 router.post('/add', async function (req, res) {
-    getUser.create({ username: "mario", password: "o123q@" });
+    getUser.create({ name: "mario", fatherSurname: "sequelize12@gmail", motherSurname: "o123q@", age: "9876543", id_father: "1" });
 
 })
 
