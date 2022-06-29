@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { success } from './response.js';
 import { getData } from '../models/db.js'
 import { getUser } from "../models/User.js";
+import { getFather } from '../models/Father.js';
 
 
 
@@ -22,7 +23,7 @@ router.get('/success', function (req, res) {
 
 
 router.get('/list', async function (req, res) {
-    getUser.findAll({ attributes: ['username', 'password'] })
+    getUser.findAll({ attributes: [ 'id', 'username', 'password'], include:{model:getFather, attributes:['id','name','fatherSurname','motherSurname','age']} })
         .then(users => {
             res.send(users)
         })
@@ -32,7 +33,7 @@ router.get('/list', async function (req, res) {
 })
 
 router.post('/add', async function (req, res) {
-    getUser.create({ username: "mario", password: "o123q@" });
+    getUser.create({ username: req.query.username, password: req.query.password });
 
 })
 

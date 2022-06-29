@@ -1,6 +1,7 @@
-import {getData} from './db.js';
+import { getData } from './db.js';
 import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
+import { getFather } from './Father.js';
 //add sequalize add
 
 const User = getData.sequelizeClient.define('cat_users', {
@@ -19,6 +20,7 @@ const User = getData.sequelizeClient.define('cat_users', {
         allowNull: false,
     },
 
+
 }, {
     tableName: 'cat_users',
     freezeTableName: true,
@@ -31,6 +33,12 @@ const User = getData.sequelizeClient.define('cat_users', {
     }
 
 });
+
+User.hasMany(getFather, {
+  
+});
+
+getFather.belongsTo(User);
 
 
 export const getUser = User;

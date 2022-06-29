@@ -4,6 +4,7 @@ import express from 'express';
  import user from './router/user.js';
  import son from './router/son.js';
  import father from './router/father.js'
+ import image from './router/image.js'
 
 
 const app = express();  
@@ -12,6 +13,7 @@ const app = express();
  app.use('/api/user', user);
  app.use('/api/father', father);
  app.use('/api/son', son);
+ app.use('/api/img', image);
  
 
 
