@@ -1,12 +1,11 @@
-export function success (req, res, message, status) {
+export function success(req, res, message, status) {
     let statusCode = status || 200;
     let statusMessage = message || '';
-    let error = false;
 
     res.status(status).send({
-        error,
-        statusCode,
-        statusMessage,
+        error: false,
+        status: statusCode,
+        body: statusMessage,
     });
 }
 
@@ -19,4 +18,4 @@ export function error(req, res, message, status) {
         status: status,
         body: statusMessage,
     });
-}
+}  
