@@ -1,0 +1,33 @@
+DeleteIcon{
+    z-index: 0;
+    position: relative;
+    height: 40px;
+}
+
+.card{
+    position: relative;
+    top: 100px;
+    width: 500px;
+}
+
+ .button-FormConfirmUse{
+     top: 50px;
+     position: relative;
+     left: 25px;
+ }
+
+
+#accept{
+    top: 75px;
+    position: relative;
+    left: 40px;
+}
+.title-FormConfirmUser{
+    position: relative;
+    top: 25px;
+    left: 35px;
+}
+.p{
+    position: relative;
+    top: 50px;
+}
