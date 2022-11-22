@@ -1,0 +1,15 @@
+.Login_container , .Graphics_container ,.Tables_container{
+        color: white;    
+}
+.Login_container{
+        position: relative;
+        left: 3px;
+}
+.Graphics_container{
+        position: relative;
+        left: 5px;
+}
+.Tables_container{
+        position: relative;
+        left: 2px;
+}

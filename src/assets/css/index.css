@@ -4,7 +4,8 @@
 }
 body {
   background:white !important;
-  min-height: 100vh;
+  max-height: 100vh;
+  max-width: 100% !important;
   display: flex;
   font-weight: 400;
   font-family: 'Fira Sans', sans-serif;

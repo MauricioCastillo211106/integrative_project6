@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -12,10 +10,10 @@ import Grid from '@material-ui/core/Grid';
 import Login from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
-import Form from "../../utilities/Forms";
 import Swal from 'sweetalert2'
 import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import Navbar_Account from './NavBar_Account';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,19 +23,19 @@ const useStyles = makeStyles((theme) => ({
         backgroundImage: 'url(https://source.unsplash.com/random)',
         backgroundRepeat: 'no-repeat',
         backgroundColor:
-            theme.palette.type === 'light' ? theme.palette.grey[60] : theme.palette.grey[1000],
+            theme.palette.type === 'Dark' ? theme.palette.grey[100] : theme.palette.grey[1000],
         backgroundSize: 'cover',
         backgroundPosition: 'center',
     },
     paper: {
-        margin: theme.spacing(10, 5),
+        margin: theme.spacing(15, 5),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.grey[900]
     },
     form: {
         width: '100%', // Fix IE 11 issue.
@@ -124,6 +122,8 @@ export default function SignInSide() {
     
     }
     return (
+       <>
+        <Navbar_Account/>
         <Grid container component="main" className={classes.root}>
             <CssBaseline/>
             <Grid item xs={false} sm={4} md={7} className={classes.image}/>
@@ -240,7 +240,7 @@ export default function SignInSide() {
                     </form>
                 </div>
             </Grid>
-        </Grid>
+        </Grid></>
     );
 
 }

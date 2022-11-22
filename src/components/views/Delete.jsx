@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/scss/Prueba.css"
+import "../../assets/css/Prueba.css"
 import DeleteIcon from '@material-ui/core/Icon';
 
 

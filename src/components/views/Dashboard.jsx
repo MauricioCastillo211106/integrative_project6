@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {Link, Route, useNavigate} from "react-router-dom";
-import "../../assets/scss/Prueba.css"
+import "../../assets/css/Prueba.css"
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-;
+import NavBar from "./NavBar";
 
 
 const Dashboard = () => {
@@ -200,7 +200,7 @@ const Dashboard = () => {
         return (
             <div className="auth-wrapper">
 
-
+                <NavBar/>
 
 
                 <div className="card dash-inner ">
