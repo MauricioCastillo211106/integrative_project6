@@ -12,17 +12,16 @@ import "../../assets/css/NavBar.css"
 
 function NavBar (){
     return(
-<>
-    <nav className=" fixed-top">
-    <div className="px-3 py-0 align-items-center text-bg-dark">
+<header className="navbar navbar-expand-lg  navbar-dark bd-navbar sticky-top p-0" >
+    <nav className="container-xxl bd-gutter flex-wrap flex-lg-nowrap text-bg-dark">
       <div className="container justify-content-center">
         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <p className="navbar-brand text-start" href="#">
-               <img src={Logo} alt="" width="40" height="40"  className="d-inline-block align-text-center"/>
-                   Pastelatti
-           </p>
-          </a>
+        <a href="/" className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                  <img src={Logo} alt="" width="40" height="40"  className="d-inline-block align-text-center"/>
+                    <p className="navbar-brand ms-2" href="#">
+                           Pastelatti
+                   </p>
+                  </a>
 
           <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
@@ -52,9 +51,8 @@ function NavBar (){
           </ul>
         </div>
       </div>
-    </div>
     </nav>
-</>
+</header>
     );
 }
 export default NavBar;

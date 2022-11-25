@@ -12,7 +12,12 @@ body {
   background-color: #b064f7;
   line-height: 1rem;
   font-size: 14px;
-  padding: 10px;
+  background:white !important;
+  max-height: 100vh;
+  max-width: 100% !important;
+  display: flex;
+  font-weight: 400;
+  font-family: 'Fira Sans', sans-serif;
 }
 .app{
   background-color: #7f7d7d;

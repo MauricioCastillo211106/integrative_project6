@@ -2,14 +2,6 @@
 * {
   box-sizing: border-box;
 }
-body {
-  background:white !important;
-  max-height: 100vh;
-  max-width: 100% !important;
-  display: flex;
-  font-weight: 400;
-  font-family: 'Fira Sans', sans-serif;
-}
 h1,h2,h3,h4,h5,h6,label,span {
   font-weight: 500;
   font-family: 'Fira Sans', sans-serif;
