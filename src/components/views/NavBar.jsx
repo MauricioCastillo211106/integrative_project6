@@ -25,7 +25,7 @@ function NavBar (){
 
           <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="/dashboard" className="nav-link text-white">
+              <a href="/Tables" className="nav-link text-white">
                   <div className="Tables_container">
                   <BackupTableIcon className=" mx-auto mb-1 " fontSize="large"/>
                   </div>
@@ -41,7 +41,7 @@ function NavBar (){
               </a>
             </li>
             <li>
-            <a href="/sign-in" className="nav-link text-white">
+            <a href="/" className="nav-link text-white">
                   <div className="Login_container">
                   <AccountCircleOutlinedIcon className=" mx-auto mb-1 " fontSize="large"/>
                   </div>

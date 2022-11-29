@@ -17,10 +17,10 @@ import Navbar_Account from './NavBar_Account';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: '98vh',
+        height: '90vh',
     },
     image: {
-        backgroundImage: 'url(https://source.unsplash.com/random)',
+        backgroundImage: 'url(https://viveloensaltillo.com/wp-content/uploads/2021/03/1254x851acsple-768x521.png)',
         backgroundRepeat: 'no-repeat',
         backgroundColor:
             theme.palette.type === 'Dark' ? theme.palette.grey[100] : theme.palette.grey[1000],
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundPosition: 'center',
     },
     paper: {
-        margin: theme.spacing(15, 5),
+        margin: theme.spacing(15, 7),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -67,59 +67,48 @@ export default function SignInSide() {
     };
 
 
-    const onSubmit = value => {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-    
-        var raw = JSON.stringify({
-          "email": value.email,
-          "password": value.password
-        });
-    
+
+    const valid = value => {
+
         var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-          redirect: 'follow'
-        };
-    
-        fetch("http://localhost:3000/api/user/login", requestOptions)
-          .then(response => response.json())
-          .then(result => {
-            switch (result.error) {
-              case "Usuario no encontrado":
-                Swal.fire({
-                  title: 'Error!',
-                  text: 'Usuario no encontrado',
-                  icon: 'error',
-                  confirmButtonText: 'Cool'
+            method: 'GET',
+            redirect: 'follow'
+          };
+          
+          fetch("https://prue-database-default-rtdb.firebaseio.com/Login.json?print=pretty", requestOptions)
+            .then(response => response.json())
+                .then(result => {
+                    console.log(result.password)
+                    console.log(value.email)
+                    console.log(value.password)
+                    if(result.email===value.email){
+                        if(result.password===value.password){
+                            Swal.fire({
+                                title:'Bienvenido!',
+                                text: 'Bienvenido' + "" + value.email,
+                                icon: 'success',
+                                confirmButtonText: 'cool'
+                            })
+                            navigate('/Tables')
+                        }else{
+                           Swal.fire({
+                              title:'Error!',
+                              text:'su contraseña es erronea',
+                              icon:'error',
+                              confirmButtonText:'confirmar'
+                           }) 
+                        }
+                    }else{
+                        Swal.fire({
+                            title:'Error!',
+                            text:'su email es incorrecto',
+                            icon:'error',
+                            confirmButtonText:'confirmar'
+                         }) 
+                    }
                 })
-                break;
-              case "Usuario no verificado":
-                Swal.fire({
-                  title: 'Error!',
-                  text: 'Usuario no verificado',
-                  icon: 'error',
-                  confirmButtonText: 'Cool'
-                })
-              break;
-              case "contraseña no válida":
-                Swal.fire({
-                  title: 'Error!',
-                  text: 'contraseña no válida',
-                  icon: 'error',
-                  confirmButtonText: 'Cool'
-                })
-              break;
-    
-              default:
-                navigate('/dashboard');
-                break;
-            }
-        })
-          .catch(error => console.error);
-    
-    
+            .catch(error => console.log('error', error));
+      
     }
     return (
        <>
@@ -133,15 +122,13 @@ export default function SignInSide() {
                         <Login/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Iniciar sesion
                     </Typography>
                     <form className={classes.form} noValidate
-                          method="POST"
-                          onSubmit={handleSubmit(onSubmit)}
+                          onSubmit={handleSubmit(valid)}
                           autoComplete={"off"}
                     >
                         <TextField
-
                             {...register("email", {
                                 required: {
                                     value: true,
@@ -157,7 +144,7 @@ export default function SignInSide() {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Correo electronico"
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -179,6 +166,7 @@ export default function SignInSide() {
                             </button>
                             <TextField
                                 className={`form-control `}
+                                
                                 {...register("password", {
                                     required: {
                                         value: true,
@@ -198,7 +186,7 @@ export default function SignInSide() {
                                 required
                                 fullWidth
                                 name="password"
-                                label="Password"
+                                label="Contraseña"
                                 type={showPassword ? "text" : "password"}
                                 id="password"
                                 autoComplete="current-password"
@@ -212,16 +200,6 @@ export default function SignInSide() {
 
                         </div>
                         <Grid container>
-                            <Grid item xs>
-                                <Link href="/forgot-password" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="/sign-up" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
                         </Grid>
                         <div className="button-FormLogin">
                             <Button
@@ -231,7 +209,7 @@ export default function SignInSide() {
                                 color="primary"
                                 className={classes.submit}
                             >
-                                Sign in
+                                iniciar sesion
                             </Button>
                         </div>
 

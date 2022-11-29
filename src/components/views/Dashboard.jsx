@@ -5,7 +5,14 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import NavBar from "./NavBar";
+// import { getDatabase, ref, onValue} from "firebase/database";
 
+// const db = getDatabase();
+// const starCountRef = ref(db, 'posts/' + postId + '/starCount');
+// onValue(starCountRef, (snapshot) => {
+//   const data = snapshot.val();
+//   updateStarCount(postElement, data);
+// });
 
 const Dashboard = () => {
     const style = {

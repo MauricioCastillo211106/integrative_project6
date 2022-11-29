@@ -1,13 +1,12 @@
 import React from "react";
 import Logo from "../../assets/img/Logo.png";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
 import "../../assets/css/NavBar_Account.css"
  
 export default function Navbar_Account() {
 
         return (
-<header className="navbar position-absolute navbar-expand-lg navbar-dark bd-navbar sticky-top p-0" >
+<header className="navbar navbar-expand-lg  navbar-dark bd-navbar sticky-top p-0" >
     <nav className="container-xxl bd-gutter flex-wrap flex-lg-nowrap text-bg-dark">
       <div className="container justify-content-center">
         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -27,14 +26,6 @@ export default function Navbar_Account() {
         Iniciar sesion
       </a>
     </li>
-                        <li>
-    <a href="/sign-up" className="nav-link text-white">
-          <div className="Registrarse_container position-relative">
-          <HowToRegIcon className=" mx-auto mb-1 " fontSize="large"/>
-          </div>
-        Registrarse
-      </a>
-    </li>
   </ul>
         </div>
       </div>
@@ -44,4 +35,3 @@ export default function Navbar_Account() {
     
     
     }
-   

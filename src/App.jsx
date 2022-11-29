@@ -14,6 +14,7 @@ import ConfirmUser from "./components/Funtion/ConfirmerUser.js";
 import Recovery from "./components/views/Recovery_password";
 import Graphics from "./components/views/Graphics";
 import NavBar from "./components/views/NavBar";
+import Tables from "./components/views/Tables"
 
 function App() {
   return (
@@ -22,16 +23,8 @@ function App() {
       <div className="App ">      
           <Routes>
             <Route exact path="/" element={<Login />} />
-              <Route path="/sign-in" element={<Login />} />
-              <Route path="/forgot-password" element={<Forgot />} />
-              <Route path="/sign-up" element={<Register />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/edit-product" element={<EditProduct />} />
-              <Route path="/create-product" element={<CreateProduct />} />
-              <Route path="/recovery-password" element={<Recovery />} />
-              <Route path="/delete-product" element={<Delete />} />
-              <Route path="/confirmUser" element={<ConfirmUser />} />
               <Route path="/Graphics" element={<Graphics />} />
+              <Route path="/Tables" element={<Tables />} />
           </Routes>
       </div>
     </Router>
