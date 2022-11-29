@@ -9,120 +9,73 @@ export default function Tables() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-        const [productos, setProductos] = useState([]);
+    const [temp, setTemp] = useState(0);
+    const [hum, setHum] = useState(0);
+    const [dist, setDist] = useState(0);
+    const [lum, setLum] = useState(0);
 
 
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/product/view")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setProductos(result)
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+          };
+          
+          fetch("https://prue-database-default-rtdb.firebaseio.com/tem.json?print=pretty", requestOptions)
+            .then(response => response.json())
+            .then(result => 
+               setTemp(result.temperatura)
             )
+            .catch(error => console.log('error', error));
+
+            fetch("https://prue-database-default-rtdb.firebaseio.com/lum.json?print=pretty", requestOptions)
+            .then(response => response.json())
+            .then(result => 
+               setLum(result.luminosidad)
+            )
+            .catch(error => console.log('error', error));
+
+            fetch("https://prue-database-default-rtdb.firebaseio.com/dis.json?print=pretty", requestOptions)
+            .then(response => response.json())
+            .then(result => 
+               setDist(result.distancia)
+            )
+            .catch(error => console.log('error', error));
+
+            fetch("https://prue-database-default-rtdb.firebaseio.com/hum.json?print=pretty", requestOptions)
+            .then(response => response.json())
+            .then(result => 
+               setHum(result.humedad)
+            )
+            .catch(error => console.log('error', error));
     }, [])
-
-
-        const renderProducto = () => {
-
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            const [open, setOpen] = useState(false);
-            const handleOpen = () => setOpen(true);
-            const handleClose = () => setOpen(false);
-
-            return (
-                <tbody>
-                <div>
-
-
-                {
-
-                    productos.map((product, index) => (
-
-                        <tr className="border-bottom" id={product.id}>
-                            <td >
-                                <div className="d-flex align-items-center" >
-                                    <div>
-                                        <img
-                                            className="pic"
-                                            src={product.numero}
-                                        />
-                                    </div>
-                                    <div className="ps-3 d-flex flex-column justify-content">
-                                        <p className="fw-bold">
-                                            <span className="ps-1">{product.Temperatura}</span>
-                                        </p>
-                                        <small className=" d-flex">
-                          <span className=" text-muted">
-                            {product.description}
-                          </span>
-                                        </small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="d-flex">
-                                    <p className="pe-3">
-                                        Price:  <span className="red">${product.Fecha}</span>
-                                    </p>
-
-                                </div>
-                            </td>
-
-
-                        </tr>
-
-                    ))
-                }
-                </div>
-
-                </tbody>
-            );
-        };
-
 
   return (
     <>
         <NavBar/>
         <div className="Temperatura d-flex justify-content-center my-0 ">
         <div class="table-responsive card w-75  text-bg-red text-center">
-        <h3>Temperatura</h3>
   <table class="table table-striped">
-        {renderProducto()}
-  <caption>List of users</caption>
+  <caption>Lista de sensores</caption>
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Temperatura</th>
-      <th scope="col">Fecha</th>
+      <th scope="col">Humedad</th>
+      <th scope="col">Luminosidad</th>
+      <th scope="col">Distancia</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-
-    </tr>
+      <tr>
+          <th>0</th>
+          <th>{temp}</th>
+          <th>{hum}</th>
+          <th>{lum}</th>
+          <th>{dist}</th>
+      </tr>
   </tbody>
-
   </table>
 </div>
         </div>
