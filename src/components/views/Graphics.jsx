@@ -5,10 +5,41 @@ import anychart from "anychart";
 
 
 
-let stage = anychart.graphics.create();
+let data2 = anychart.data.set([
+  ["01:00", 34, 50],
+  ["02:00", 23, 50],
+  ["04:00", 11, 50],
+  ["05:00", 39, 50],
+  ["06:00", 8, 50],
+  ["07:00", 10, 50],
+  ["08:00", 10, 50],
+  ["09:00", 23, 50],
+  ["10:00", 76, 50],
+  ["11:00", 0, 50],
+  ["12:00", 0, 50],
+  ["13:00", 0, 50],
+  ["14:00", 22, 50],
+  ["15:00", 23, 50],
+  ["16:00", 11, 50],
+  ["17:00", 0, 50],
+  ["18:00", 14, 50],
+  ["19:00", 0, 50],
+  ["20:00", 19, 50],
+  ["21:00", 10, 50],
+  ["22:00", 0, 50],
+  ["23:00", 0, 50],
+  ["24:00", 10, 50],
+  ["24:00", 11, 50]
+
+]);
+let error2 = anychart.column();
+var Humedad = data2.mapAs({x: 0, value: 1});
+let series2 = error2.column(Humedad);
+series2.error().valueLowerError(1);
+series2.error().valueUpperError(1);
 let stage2 = anychart.graphics.create();
 let stage3 = anychart.graphics.create();
-let chart1 = anychart.line([1, 2, 3]);
+
 let chart0 = anychart.line([1, 2, 3]);
   let chart2 = anychart.line([1, 2, 3]);
   const complexBar = {
@@ -33,13 +64,6 @@ let chart0 = anychart.line([1, 2, 3]);
       value: 4.5
     }
   };
-
-  // const data2 = anychart.data.set([
-  //   {x: 'p1', value1: 5, value2: 4},
-  //   {x: 'p2', value1: 6, value2: 2},
-  //   {x: 'p3', value1: 3, value2: 7},
-  //   {x: 'p4', value1: 1, value2: 5}
-  // ]);
 
   let data = anychart.data.set([
     ["January", 10000, 12501],
@@ -73,23 +97,21 @@ function Grafics() {
             </div>
           </article>
 
-          <article className="col-12 col-md-6 d-flex justify-content-center mt-4">
-            <div class="card w-75  ">
-              <div class="card-body ">
-                <h5 class="card-title text-center">Humedad y temperatura</h5>
+          <article className="col-12 col-md-6 d-flex justify-content-center mt-4 " >
+            <div className="card w-75   overflow-auto">
+              <div className="card-body">
+                <h5 className="card-title">Humedad</h5>
                 <div className="d-flex justify-content-center">
-                <AnyChart
-                  instance={stage}
+                  <AnyChart
+                  instance={error2}
                   id="Humedad"
-                  width={400}
+                  width={900}
                   height={300}
-                  charts={[chart1]}
+                  charts={[data2]}
+                  title="HUMEDAD"
                 />
                 </div>
-
-                {/* <a href="#" class="d-md-none d-block  displa btn btn-primary">
-                  Grafica
-                </a> */}
+                
               </div>
             </div>
           </article>

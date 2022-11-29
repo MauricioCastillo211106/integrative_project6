@@ -4,28 +4,48 @@ import "../../assets/css/Prueba.css"
 import * as React from 'react';
 import NavBar from "./NavBar";
 
+
+
 export default function Tables() {
 
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [arrayTemp, setArrayTemp]=useState([]);
+    const [arrayHum, setArrayHum]=useState([])
+    const [arrayDist, setArrayDist]=useState([])
+    const [arrayLum, setArrayLum]=useState([])
     const [temp, setTemp] = useState(0);
     const [hum, setHum] = useState(0);
     const [dist, setDist] = useState(0);
     const [lum, setLum] = useState(0);
+    const arr = [temp];
+    const arr3 = [...arr]; 
 
 
-
+    
     useEffect(() => {
         var requestOptions = {
             method: 'GET',
             redirect: 'follow'
           };
-          
+
           fetch("https://prue-database-default-rtdb.firebaseio.com/tem.json?print=pretty", requestOptions)
             .then(response => response.json())
             .then(result => 
-               setTemp(result.temperatura)
+              {
+                
+                setTemp(result.temperatura)
+                setArrayTemp(result.temperatura)
+
+                localStorage.setItem('temperatura', JSON.stringify({ temperatura:  [...arr3] }));
+                console.log(localStorage.getItem('temperatura'))
+
+                // localStorage.setItem(arr);
+
+                console.log("holi")
+              }
+              
             )
             .catch(error => console.log('error', error));
 
