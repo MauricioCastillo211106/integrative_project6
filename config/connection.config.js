@@ -38,6 +38,7 @@ const sequelizeClient = (() => {
 
 
 sequelizeClient.sync({ alert: true })
+//forse
     .then(() => {
         console.log('Conectado')
     })
