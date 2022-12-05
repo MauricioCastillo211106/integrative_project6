@@ -1,224 +1,125 @@
-import React, {useState} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import Login from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
-import Swal from 'sweetalert2'
-import {useNavigate} from "react-router-dom";
-import {useForm} from "react-hook-form";
+
 import Navbar_Account from './NavBar_Account';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext.js";
+import { Alert } from "../Funtion/Alert.js";
+  import "../../assets/css/index.css"
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        height: '90vh',
-    },
-    image: {
-        backgroundImage: 'url(https://viveloensaltillo.com/wp-content/uploads/2021/03/1254x851acsple-768x521.png)',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor:
-            theme.palette.type === 'Dark' ? theme.palette.grey[100] : theme.palette.grey[1000],
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-    paper: {
-        margin: theme.spacing(15, 7),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.grey[900]
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
+export default function Login() {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-export default function SignInSide() {
-    const classes = useStyles();
-    const navigate = useNavigate()
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
-
-    const [showPassword, setShowPassword] = useState(false);
-
-
-
-
-
-    const togglePassword = (e) => {
-        if (showPassword) {
-            setShowPassword(false);
-        } else {
-            setShowPassword(true);
-        }
-    };
-
-
-
-    const valid = value => {
-
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-          };
-          
-          fetch("https://prue-database-default-rtdb.firebaseio.com/Login.json?print=pretty", requestOptions)
-            .then(response => response.json())
-                .then(result => {
-                    console.log(result.password)
-                    console.log(value.email)
-                    console.log(value.password)
-                    if(result.email===value.email){
-                        if(result.password===value.password){
-                            Swal.fire({
-                                title:'Bienvenido!',
-                                text: 'Bienvenido' + "" + value.email,
-                                icon: 'success',
-                                confirmButtonText: 'cool'
-                            })
-                            navigate('/Tables')
-                        }else{
-                           Swal.fire({
-                              title:'Error!',
-                              text:'su contraseña es erronea',
-                              icon:'error',
-                              confirmButtonText:'confirmar'
-                           }) 
-                        }
-                    }else{
-                        Swal.fire({
-                            title:'Error!',
-                            text:'su email es incorrecto',
-                            icon:'error',
-                            confirmButtonText:'confirmar'
-                         }) 
-                    }
-                })
-            .catch(error => console.log('error', error));
-      
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+        console.log(user)
+      await login(user.email, user.password);
+      navigate("/Tables");
+    } catch (error) {
+      setError(error.message);
     }
-    return (
-       <>
-        <Navbar_Account/>
-        <Grid container component="main" className={classes.root}>
-            <CssBaseline/>
-            <Grid item xs={false} sm={4} md={7} className={classes.image}/>
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <Login/>
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Iniciar sesion
-                    </Typography>
-                    <form className={classes.form} noValidate
-                          onSubmit={handleSubmit(valid)}
-                          autoComplete={"off"}
-                    >
-                        <TextField
-                            {...register("email", {
-                                required: {
-                                    value: true,
-                                    message: "Necesitas este campo"
-                                },
-                                pattern: {
-                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                    message: "El formato no es correcto"
-                                }
-                            })}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Correo electronico"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <div className="error-input-email">{errors.email && <p>{errors.email.message}</p>}</div>
+  };
 
-                        <div>
-                        <div className="input-group">
-                            <button id="ojo"
-                                    type="button"
+  const handleChange = ({ target: { value, name } }) =>
+    setUser({ ...user, [name]: value });
 
+  return (
+    // <div className="w-full max-w-xs m-auto">
+    //   {error && <Alert message={error} />}
 
-                                    className="btn btn-outline-dark  btn-sm"
-                                    onClick={(e) => togglePassword(e)}
-                            >
-                                <i
-                                    className={showPassword ? "far fa-eye" : "far fa-eye-slash"}
-                                ></i>{" "}
-                            </button>
-                            <TextField
-                                className={`form-control `}
-                                
-                                {...register("password", {
-                                    required: {
-                                        value: true,
-                                        message: "El campo es requerido"
-                                    },
-                                    minLength: {
-                                        value: 8,
-                                        message: "La contraseña debe tener al menos 8 caracteres"
-                                    },
-                                    pattern: {
-                                        value: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{6,}$/i,
-                                        message: "debe de contener mayusculas, numeros y algun caracter especial "
-                                    }
-                                })}
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Contraseña"
-                                type={showPassword ? "text" : "password"}
-                                id="password"
-                                autoComplete="current-password"
-                            />
+    //   <form
+    //     onSubmit={handleSubmit}
+    //     className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    //   >
+    //     <div className="mb-4">
+    //       <label
+    //         htmlFor="email"
+    //         className="block text-gray-700 text-sm font-bold mb-2"
+    //       >
+    //         Email
+    //       </label>
+    //       <input
+    //         type="email"
+    //         name="email"
+    //         id="email"
+    //         onChange={handleChange}
+    //         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    //         placeholder="youremail@company.tld"
+    //       />
+    //     </div>
+    //     <div className="mb-4">
+    //       <label
+    //         htmlFor="password"
+    //         className="block text-gray-700 text-sm font-bold mb-2"
+    //       >
+    //         Password
+    //       </label>
+    //       <input
+    //         type="password"
+    //         name="password"
+    //         id="password"
+    //         onChange={handleChange}
+    //         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    //         placeholder="*************"
+    //       />
+    //     </div>
 
+    //     <div className="flex items-center justify-between">
+    //       <button
+    //         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    //         type="submit"
+    //       >
+    //         Sign In
+    //       </button>
+    //     </div>
+    //   </form>
+    // </div>
 
-
-
+      
+    <div className="maincontainer">
+        <Navbar_Account/>   
+        {error && <Alert message={error} />}
+    <div class="container-fluid">
+        <div class="row no-gutter">
+           
+            <div class="col-md-6 d-none d-md-flex bg-image"></div>
+            
+            <div class="col-md-6 bg-light">
+                <div class="login d-flex align-items-center py-5">
+                   
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-10 col-xl-7 mx-auto">
+                                <h3 class="display-4">Anurati</h3>
+                                <p class="text-muted mb-4">Control de masas para pastel</p>
+                                <form  onSubmit={handleSubmit}>
+                                    <div class="mb-3">
+                                        <input onChange={handleChange} id="email" name='email' type="email" placeholder="Email address" class="form-control rounded-pill border-0 shadow-sm px-4" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <input onChange={handleChange} id="password" name='password' type="password" placeholder="Password" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
+                                    </div>
+                                    
+                                    <div class="d-grid gap-2 mt-2">
+                                    <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Iniciar sesion</button>
+                                    </div>
+                                    
+                                   
+                                </form>
                             </div>
-                            <div className="error-input-password">{errors.password && <p>{errors.password.message}</p>}</div>
-
                         </div>
-                        <Grid container>
-                        </Grid>
-                        <div className="button-FormLogin">
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                            >
-                                iniciar sesion
-                            </Button>
-                        </div>
-
-                        <Box mt={5}>
-                        </Box>
-                    </form>
+                    </div>
                 </div>
-            </Grid>
-        </Grid></>
-    );
-
+            </div>
+        </div>
+    </div>
+  </div>
+  );
 }

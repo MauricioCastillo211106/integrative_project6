@@ -1,8 +1,6 @@
 import React from "react";
-import Logo from "../../assets/img/Logo.png";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import BackupTableIcon from '@mui/icons-material/BackupTable';
-import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
+import Logo from "../../assets/img/logofinal.png";
+
 import "../../assets/css/NavBar.css"
 
 
@@ -27,7 +25,7 @@ function NavBar (){
             <li>
               <a href="/Tables" className="nav-link text-white">
                   <div className="Tables_container">
-                  <BackupTableIcon className=" mx-auto mb-1 " fontSize="large"/>
+                  {/* <BackupTableIcon className=" mx-auto mb-1 " fontSize="large"/> */}
                   </div>
                 Tablas
               </a>
@@ -35,7 +33,7 @@ function NavBar (){
             <li>
               <a href="/Graphics" className="nav-link text-white">
               <div className="Graphics_container">
-                  <StackedBarChartIcon className=" mx-auto mb-1 " fontSize="large"/>
+                  {/* <StackedBarChartIcon className=" mx-auto mb-1 " fontSize="large"/> */}
                   </div>
                 Graficas
               </a>
@@ -43,7 +41,7 @@ function NavBar (){
             <li>
             <a href="/" className="nav-link text-white">
                   <div className="Login_container">
-                  <AccountCircleOutlinedIcon className=" mx-auto mb-1 " fontSize="large"/>
+                  {/* <AccountCircleOutlinedIcon className=" mx-auto mb-1 " fontSize="large"/> */}
                   </div>
                 cuenta
               </a>

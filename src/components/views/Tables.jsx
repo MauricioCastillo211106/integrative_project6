@@ -1,105 +1,107 @@
-import {useEffect, useState} from "react";
-import {Link, Route, useNavigate} from "react-router-dom";
-import "../../assets/css/Prueba.css"
-import * as React from 'react';
+import { useEffect, useState } from "react";
+import { Link, Route, useNavigate } from "react-router-dom";
+import "../../assets/css/Prueba.css";
+import * as React from "react";
 import NavBar from "./NavBar";
+import ReactDOM from "react-dom"
 
-
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
 
 export default function Tables() {
-
-    const navigate = useNavigate();
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [arrayTemp, setArrayTemp]=useState([]);
-    const [arrayHum, setArrayHum]=useState([])
-    const [arrayDist, setArrayDist]=useState([])
-    const [arrayLum, setArrayLum]=useState([])
-    const [temp, setTemp] = useState(0);
-    const [hum, setHum] = useState(0);
-    const [dist, setDist] = useState(0);
-    const [lum, setLum] = useState(0);
-    const arr = [temp];
-    const arr3 = [...arr]; 
+  const [data, setData] = useState([]);
+  const [temp, setTemp] = useState(0);
+  const [hum, setHum] = useState(0);
+  const [dist, setDist] = useState(0);
+  const [lum, setLum] = useState(0);
 
 
-    
-    useEffect(() => {
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-          };
 
-          fetch("https://prue-database-default-rtdb.firebaseio.com/tem.json?print=pretty", requestOptions)
-            .then(response => response.json())
-            .then(result => 
-              {
-                
-                setTemp(result.temperatura)
-                setArrayTemp(result.temperatura)
 
-                localStorage.setItem('temperatura', JSON.stringify({ temperatura:  [...arr3] }));
-                console.log(localStorage.getItem('temperatura'))
 
-                // localStorage.setItem(arr);
+  const push = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-                console.log("holi")
-              }
-              
-            )
-            .catch(error => console.log('error', error));
+    var raw = JSON.stringify({
+      temperatura: temp.temperatura,
+      humedad: hum.humedad,
+      ultrasonico: dist.distancia,
+      luminosidad: lum.luminosidad,
+    });
 
-            fetch("https://prue-database-default-rtdb.firebaseio.com/lum.json?print=pretty", requestOptions)
-            .then(response => response.json())
-            .then(result => 
-               setLum(result.luminosidad)
-            )
-            .catch(error => console.log('error', error));
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
 
-            fetch("https://prue-database-default-rtdb.firebaseio.com/dis.json?print=pretty", requestOptions)
-            .then(response => response.json())
-            .then(result => 
-               setDist(result.distancia)
-            )
-            .catch(error => console.log('error', error));
+    fetch("http://localhost:3000/api/data/create", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(raw);
+        console.log(result);
+      })
+      .catch((error) => console.log("error", error));
+  };
 
-            fetch("https://prue-database-default-rtdb.firebaseio.com/hum.json?print=pretty", requestOptions)
-            .then(response => response.json())
-            .then(result => 
-               setHum(result.humedad)
-            )
-            .catch(error => console.log('error', error));
-    }, [])
+  useEffect(() => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
 
-  return (
-    <>
-        <NavBar/>
-        <div className="Temperatura d-flex justify-content-center my-0 ">
-        <div class="table-responsive card w-75  text-bg-red text-center">
-  <table class="table table-striped">
-  <caption>Lista de sensores</caption>
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Temperatura</th>
-      <th scope="col">Humedad</th>
-      <th scope="col">Luminosidad</th>
-      <th scope="col">Distancia</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <th>0</th>
-          <th>{temp}</th>
-          <th>{hum}</th>
-          <th>{lum}</th>
-          <th>{dist}</th>
-      </tr>
-  </tbody>
-  </table>
-</div>
-        </div>
+    fetch(
+      "https://prue-database-default-rtdb.firebaseio.com/.json?print=pretty",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setTemp(result.tem);
+        setLum(result.lum);
+        setHum(result.hum);
+        setDist(result.dis);
+        setData(result);
 
-    </>
-  );
+      })
+      .catch((error) => console.log("error", error));
+
+  
+  }, []);  
+   
+
+return(
+  <>
+  <NavBar />
+  <div className="Temperatura d-flex justify-content-center my-0 ">
+    <div class="table-responsive card w-75  text-bg-red text-center">
+      <table class="table table-striped">
+        <caption>Lista de sensores</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Temperatura</th>
+            <th scope="col">Humedad</th>
+            <th scope="col">luminosidad</th>
+            <th scope="col">distancia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>0</th>
+            <th>{temp.temperatura}</th>
+            <th>{hum.humedad}</th>
+            <th>{lum.luminosidad}</th>
+            <th>{dist.distancia}</th>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</>
+);
 }
+

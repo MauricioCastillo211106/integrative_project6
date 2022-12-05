@@ -5,19 +5,25 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react
 import Login from "./components/views/index";
 import Graphics from "./components/views/Graphics";
 import Tables from "./components/views/Tables"
+import { ProtectedRoute } from "./components/Funtion/ProtectedRoute.js ";
+import { AuthProvider } from "./context/AuthContext";
+
 
 function App() {
   return (
-    
-    <Router>
+    <div className="index">
+       <AuthProvider>
+       <Router>
       <div className="App ">      
           <Routes>
-            <Route exact path="/" element={<Login />} />
-              <Route path="/Graphics" element={<Graphics />} />
-              <Route path="/Tables" element={<Tables />} />
+            <Route exact path="/" element={ <Login />} />
+              <Route path="/Graphics" element={<ProtectedRoute><Graphics /></ProtectedRoute>} />
+              <Route path="/Tables" element={<ProtectedRoute><Tables /></ProtectedRoute>} />
           </Routes>
       </div>
     </Router>
+       </AuthProvider>
+    </div>
   );
 }
 export default App;
