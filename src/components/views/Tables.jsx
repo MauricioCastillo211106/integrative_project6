@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, Route, useNavigate } from "react-router-dom";
 import "../../assets/css/Prueba.css";
 import * as React from "react";
 import NavBar from "./NavBar";
-import ReactDOM from "react-dom"
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root')
-);
+
+
 
 export default function Tables() {
   const [data, setData] = useState([]);
@@ -19,33 +16,32 @@ export default function Tables() {
 
 
 
+  // const push = () => {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Content-Type", "application/json");
 
-  const push = () => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+  //   var raw = JSON.stringify({
+  //     temperatura: temp.temperatura,
+  //     humedad: hum.humedad,
+  //     ultrasonico: dist.distancia,
+  //     luminosidad: lum.luminosidad,
+  //   });
 
-    var raw = JSON.stringify({
-      temperatura: temp.temperatura,
-      humedad: hum.humedad,
-      ultrasonico: dist.distancia,
-      luminosidad: lum.luminosidad,
-    });
+  //   var requestOptions = {
+  //     method: "POST",
+  //     headers: myHeaders,
+  //     body: raw,
+  //     redirect: "follow",
+  //   };
 
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("http://localhost:3000/api/data/create", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(raw);
-        console.log(result);
-      })
-      .catch((error) => console.log("error", error));
-  };
+  //   fetch("http://localhost:3000/api/data/create", requestOptions)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       console.log(raw);
+  //       console.log(result);
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // };
 
   useEffect(() => {
     var requestOptions = {

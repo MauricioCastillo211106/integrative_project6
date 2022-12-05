@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../../assets/img/logofinal.png";
-
+import { useAuth } from "../../context/AuthContext";
 import "../../assets/css/NavBar.css"
 
 
@@ -9,6 +9,17 @@ import "../../assets/css/NavBar.css"
 
 
 function NavBar (){
+  const { logout, user } = useAuth();
+
+  console.log(user);
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
     return(
 <header className="navbar navbar-expand-lg  navbar-dark bd-navbar sticky-top p-0" >
     <nav className="container-xxl bd-gutter flex-wrap flex-lg-nowrap text-bg-dark">
@@ -39,11 +50,11 @@ function NavBar (){
               </a>
             </li>
             <li>
-            <a href="/" className="nav-link text-white">
+            <a href="/" className="nav-link text-white" onClick={handleLogout}>
                   <div className="Login_container">
                   {/* <AccountCircleOutlinedIcon className=" mx-auto mb-1 " fontSize="large"/> */}
                   </div>
-                cuenta
+                cerrar sesion
               </a>
             </li>
           </ul>
