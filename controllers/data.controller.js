@@ -10,7 +10,7 @@ const data = dotenv.config({
 });
 
 const data_view = async function (req, res) {
-  getDatas.data
+  getDatas.Data
     .findAll()
     .then((r) => {
       res.send(r);
@@ -22,7 +22,7 @@ const data_view = async function (req, res) {
 
 const data_create = async function (req, res) {
 
-  getDatas.data
+  getDatas.Data
     .create(
       {
         temperatura: req.body.temperatura,
@@ -31,7 +31,7 @@ const data_create = async function (req, res) {
         luminosidad: req.body.luminosidad,
       },
       {
-        fields: ["temperatura","nameProduc", "humedad", "ultrasonico", "luminosidad"],
+        fields: ["temperatura", "humedad", "ultrasonico", "luminosidad"],
       }
     )
     .then((data) => {
@@ -48,7 +48,7 @@ const data_update = (req, res) => {
   let ultrasonico = req.body.ultrasonico;
   let luminosidad = req.body.luminosidad;
   let newDatas = { temperatura, humedad, ultrasonico, luminosidad };
-  getDatas.data
+  getDatas.Data
     .findOne({ where: { id: id } })
 
     .then((r) => {

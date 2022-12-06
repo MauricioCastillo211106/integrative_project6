@@ -4,13 +4,12 @@ import middleware from "./middlewares/token.middleware.js";
 import data from "./routes/data.routes.js";
 import express from "express";
 
-import user from "./routes/user.routes.js";
+
 
 const app = express();
 
 app.use(express.json());
 // ROUTERS
-app.use("/api/user", user);
 app.use("/api/data", data);
 
 // app.use('/api/profile', middleware, profile);
