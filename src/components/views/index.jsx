@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.js";
 import { Alert } from "../Funtion/Alert.js";
-  import "../../assets/css/index.css"
+import "../../assets/css/index.css"
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -44,7 +44,7 @@ export default function Login() {
             <div class="col-md-6 bg-light">
                 <div class="login d-flex align-items-center py-5">
                    
-                    <div class="container">
+                    <div class="container  text-center">
                         <div class="row">
                             <div class="col-lg-10 col-xl-7 mx-auto">
                                 <h3 class="display-4">Anurati</h3>
@@ -56,7 +56,7 @@ export default function Login() {
                                     <div class="mb-3">
                                         <input onChange={handleChange} id="password" name='password' type="password" placeholder="Password" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" />
                                     </div>
-                                    
+                                    <br/>
                                     <div class="d-grid gap-2 mt-2">
                                     <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Iniciar sesion</button>
                                     </div>

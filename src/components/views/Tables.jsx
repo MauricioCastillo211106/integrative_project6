@@ -7,7 +7,6 @@ import NavBar from "./NavBar";
 
 
 export default function Tables() {
-  const [data, setData] = useState([]);
   const [temp, setTemp] = useState(0);
   const [hum, setHum] = useState(0);
   const [dist, setDist] = useState(0);
@@ -16,56 +15,66 @@ export default function Tables() {
 
 
 
-  // const push = () => {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append("Content-Type", "application/json");
+  const push = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-  //   var raw = JSON.stringify({
-  //     temperatura: temp.temperatura,
-  //     humedad: hum.humedad,
-  //     ultrasonico: dist.distancia,
-  //     luminosidad: lum.luminosidad,
-  //   });
+    var raw = JSON.stringify({
+      temperatura: temp,
+      humedad: hum,
+      ultrasonico: dist,
+      luminosidad: lum,
+    });
 
-  //   var requestOptions = {
-  //     method: "POST",
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: "follow",
-  //   };
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
 
-  //   fetch("http://localhost:3000/api/data/create", requestOptions)
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       console.log(raw);
-  //       console.log(result);
-  //     })
-  //     .catch((error) => console.log("error", error));
-  // };
+    fetch("http://localhost:3000/api/data/create", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(raw);
+        console.log(result);
+      })
+      .catch((error) => console.log("error", error));
+  };
 
-  useEffect(() => {
+  const dataFetch = async () => {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
     };
-
-    fetch(
-      "https://prue-database-default-rtdb.firebaseio.com/.json?print=pretty",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        setTemp(result.tem);
-        setLum(result.lum);
-        setHum(result.hum);
-        setDist(result.dis);
-        setData(result);
-
-      })
-      .catch((error) => console.log("error", error));
-
+    await fetch(
+        "https://prue-database-default-rtdb.firebaseio.com/.json?print=pretty",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          setTemp(result.tem.temperatura);
+          setLum(result.lum.luminosidad);
+          setHum(result.hum.humedad);
+          setDist(result.dis.distancia);
+          if(result.hum.humedad!==hum.humedad || result.tem.temperatura!==temp.temperatura || result.lum.luminosidad!==lum.luminosidad || result.dis.distancia!==dist.distancia){
+            push()
+          }        
   
-  }, []);  
+          
+  
+  
+  
+        })
+        .catch((error) => console.log("error", error));
+  
+  }
+
+
+  useEffect(() => {
+
+    dataFetch()
+  },);  
    
 
 return(
@@ -87,10 +96,10 @@ return(
         <tbody>
           <tr>
             <th>0</th>
-            <th>{temp.temperatura}</th>
-            <th>{hum.humedad}</th>
-            <th>{lum.luminosidad}</th>
-            <th>{dist.distancia}</th>
+            <th>{temp}</th>
+            <th>{hum}</th>
+            <th>{lum}</th>
+            <th>{dist}</th>
           </tr>
         </tbody>
       </table>
