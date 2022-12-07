@@ -100,7 +100,7 @@ function Grafics() {
           <article className="col-12 col-md-6 d-flex justify-content-center mt-4 " >
             <div className="card w-75   overflow-auto">
               <div className="card-body">
-                <h5 className="card-title">Humedad</h5>
+                <h5 className="card-title text-center">Humedad</h5>
                 <div className="d-flex justify-content-center">
                   <AnyChart
                   instance={error2}
@@ -108,7 +108,7 @@ function Grafics() {
                   width={900}
                   height={300}
                   charts={[data2]}
-                  title="HUMEDAD"
+                  title=""
                 />
                 </div>
                 

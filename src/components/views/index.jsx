@@ -47,7 +47,7 @@ export default function Login() {
                     <div class="container  text-center">
                         <div class="row">
                             <div class="col-lg-10 col-xl-7 mx-auto">
-                                <h3 class="display-4">Anurati</h3>
+                                <h3 class="display-4">Pastelatti</h3>
                                 <p class="text-muted mb-4">Control de masas para pastel</p>
                                 <form  onSubmit={handleSubmit}>
                                     <div class="mb-3">

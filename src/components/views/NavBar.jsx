@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../assets/img/logofinal.png";
+import Logo from "../../assets/img/Logo.png";
 import { useAuth } from "../../context/AuthContext";
 import "../../assets/css/NavBar.css"
 
@@ -41,12 +41,7 @@ function NavBar (){
               </a>
             </li>
             <li>
-              <a href="/Graphics" className="nav-link text-white">
-              <div className="Graphics_container">
-                  {/* <StackedBarChartIcon className=" mx-auto mb-1 " fontSize="large"/> */}
-                  </div>
-                Graficas
-              </a>
+
             </li>
             <li>
             <a href="/" className="nav-link text-white" onClick={handleLogout}>
