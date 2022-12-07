@@ -20,6 +20,17 @@ const data_view = async function (req, res) {
     });
 };
 
+const data_delete = async function (req, res) {
+  getDatas.Data
+    .destroy({ where:{},truncate:true})
+    .then((r) => {
+      res.status(200).json({ message: "Deleted successfully" });
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+};
+
 const data_create = async function (req, res) {
 
   getDatas.Data
@@ -65,4 +76,5 @@ export const dataController = {
   data_create,
   data_update,
   data_view,
+  data_delete
 };

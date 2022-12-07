@@ -63,12 +63,37 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
  *        description: Not Found
  */
 
+/**
+ * @openapi
+ * '/api/data/delete':
+ *  delete:
+ *     tags:
+ *     - data
+ *     summary: eliminar Producto
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *            required:
+ *            properties:
+ *     responses:
+ *      200:
+ *        description: update
+ *      400:
+ *        description: Bad Request
+ *      404:
+ *        description: Not Found
+ */
+
+
  router.get("/view", (req, res) => dataController.data_view(req, res));
 
 router.post("/create", (req, res) => dataController.data_create(req, res));
 
 router.put("/update", (req, res) => dataController.data_update(req, res));
 
+router.delete("/delete", (req, res) => dataController.data_delete(req, res));
 
 
 export default router;
