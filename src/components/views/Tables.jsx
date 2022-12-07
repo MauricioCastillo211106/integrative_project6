@@ -15,7 +15,7 @@ export default function Tables() {
     const newintervalId = setInterval(() => {
       handleFetchData();
 
-    }, 300000);
+    }, 10000);
     setIntervalID(newintervalId);
   };
 
