@@ -1,21 +1,36 @@
 import AnyChart from "anychart-react";
 import anychart from "anychart";
+import { useState, useEffect } from "react";
 
 const CardLineal = () => {
+  const [humedad, setHumedad]= useState([]);
+  const [intervalId, setIntervalID] = useState(0);
 
-  const getData =()=>{
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-    
-    fetch("http://3.144.72.54/api/data/view", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+  const handleActive = () => {
+    const newintervalId = setInterval(() => {
+      getData();
+
+    }, 10000);
+    setIntervalID(newintervalId);
+  };
+  const getData = async ()=>{
+
+    const response = await fetch(
+      `http://3.144.72.54/api/data/view`
+    );
+    const data = await response.json();
+    var humedadAux =[]     
+    data.map(elemento =>{
+      humedadAux.push(elemento.humedad)
+    })
+    setHumedad(humedadAux);
+    console.log(humedadAux)
   }
+  useEffect(()=>{
+    handleActive();
+  },[])
 
-  let chart1 = anychart.line([1, 2, 3]);
+  let chart1 = anychart.line(humedad);
 
   let stage2 = anychart.graphics.create();
 

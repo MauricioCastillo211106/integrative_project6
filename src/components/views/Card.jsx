@@ -1,7 +1,7 @@
 import React from "react";
 import Dispersion from "./Dispersión.jsx"
 import RegresionLineal from "./RegresionLineal.jsx"
-import Bar from "./Bar.jsx"
+import Bara from "./Bar.jsx"
 import Lineal from "./Lineal.jsx"
 
 const CardBar = () => {
@@ -14,7 +14,7 @@ const CardBar = () => {
             <div className="card text-center">
               <div className="card-body">
                 <h5 className="card-title">Regreción lineal</h5>
-                <p className="card-text mb-3">Humedad</p>
+                <p className="card-text mb-3">Luminocidad</p>
                 <button
                   className="btn btn-primary"
                   type="button"
@@ -38,7 +38,7 @@ const CardBar = () => {
             <div className="card text-center">
               <div className="card-body">
                 <h5 className="card-title">Disperción</h5>
-                <p className="card-text mb-3">Distancia</p>
+                <p className="card-text mb-3">Ultrasonico</p>
                 <button
                   className="btn btn-primary"
                   type="button"
@@ -61,7 +61,7 @@ const CardBar = () => {
             <div className="card text-center">
               <div className="card-body">
                 <h5 className="card-title">Barras</h5>
-                <p className="card-text mb-3">temperatura</p>
+                <p className="card-text mb-3">Temperatura</p>
                 <button
                   className="btn btn-primary"
                   type="button"
@@ -74,7 +74,7 @@ const CardBar = () => {
                 </button>
                 <div className="collapse" id="bar">
                   <div className="card-body">
-<Bar/>
+<Bara/>
                   </div>
                 </div>
               </div>
@@ -84,7 +84,7 @@ const CardBar = () => {
             <div className="card text-center">
               <div className="card-body">
                 <h5 className="card-title">Lineal</h5>
-                <p className="card-text mb-3">luminosidad</p>
+                <p className="card-text mb-3">Humedad</p>
                 <button
                   className="btn btn-primary"
                   type="button"

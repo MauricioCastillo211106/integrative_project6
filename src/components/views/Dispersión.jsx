@@ -1,40 +1,56 @@
 import AnyChart from "anychart-react";
 import anychart from "anychart";
+import { useState, useEffect } from "react";
 
 const CardBar = () => {
+  const [lumino, setLumino] = useState([])
+      const [intervalId, setIntervalID] = useState(0);
 
-  const getData =()=>{
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
+    const handleActive = () => {
+      const newintervalId = setInterval(() => {
+        getData();
+  
+      }, 10000);
+      setIntervalID(newintervalId);
     };
-    
-    fetch("http://3.144.72.54/api/data/view", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-  }
 
-  let data1 = [1,2,3,4,5,6,7,10]
+  const getData = async ()=>{
+    const response = await fetch(
+      `http://3.144.72.54/api/data/view`
+    );
+    const data = await response.json();
+    var luminosidadAux =[]     
+    data.map(elemento =>{
+      luminosidadAux.push(elemento.luminosidad)
+    })
+    setLumino(luminosidadAux);
+    console.log(luminosidadAux)
+    
+  }
+  useEffect(()=>{
+    handleActive();
+  },[])
+
+  
   let chart = anychart.scatter();
   
   chart.animation(true);
-  chart.title("Grafica de dispdexrsion");
+  chart.title("Grafica de dispersion");
   chart.xScale().minimum(0).maximum(24).ticks({ interval: 4 });
-  chart.yScale().minimum(0).maximum(60).ticks({ interval: 2 });
-  chart.yAxis().title("Humedad");
+  chart.yScale().minimum(0).maximum(1500).ticks({ interval: 2 });
+  chart.yAxis().title("Luminocidad");
   chart.xAxis().title("Tiempo(Horas)");
   chart.interactivity().hoverMode("by-spot").spotRadius(10);
 
 
-  var marker = chart.marker(data1);
+  var marker = chart.marker(lumino);
   marker.type("triangle-up").size(3);
   marker.hovered().size(7).fill("gold").stroke(anychart.color.darken("gold"));
   marker
     .tooltip()
     .hAlign("start")
     .format(function () {
-      return "Humedad: " + this.value + " " + "Hora: " + this.x;
+      return " Luminocidad : " + this.value + " " + "Hora: " + this.x;
     });
   
 
