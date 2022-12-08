@@ -18,7 +18,6 @@ function App() {
       <div className="App ">      
           <Routes>
             <Route exact path="/" element={ <Login />} />
-              <Route path="/Graphics" element={<ProtectedRoute><CardBar /></ProtectedRoute>} />
               <Route path="/Tables" element={<ProtectedRoute><Tables /></ProtectedRoute>} />
           </Routes>
       </div>
